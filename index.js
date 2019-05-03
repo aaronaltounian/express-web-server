@@ -6,7 +6,9 @@ const state = require('./state');
 let users = state.users;
 
 const bodyParser = require('body-parser');
-let jsonParser = bodyParser.json();
+// let jsonParser = bodyParser.json();
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // get all users:
 app.get('/users', (req, res) => {
@@ -24,7 +26,7 @@ app.get('/users/:userId', (req, res) => {
 })
 
 // post a new user using body-parser to get data from the client:
-app.post('/users', jsonParser, (req, res) => {
+app.post('/users', (req, res, next) => {
     // create a variable newUser from the parsed JSON in the body:
     let newUser = req.body;
     // create an id for the new user based on the existing ids:
@@ -36,7 +38,7 @@ app.post('/users', jsonParser, (req, res) => {
 })
 
 // update a user, using body-parser to get data from the client:
-app.put('/users/:userId', jsonParser, (req, res) => {
+app.put('/users/:userId', (req, res) => {
     // create updated variable to store the parsed JSON from the body:
     let updated = req.body;
     // create id variable to store the path:
