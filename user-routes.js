@@ -16,7 +16,6 @@ router.post('/users', post);
 router.put('/users/:userId', update);
 router.delete('/users/:userId', remove);
 
-
 // // get all users:
 // app.get('/users', (req, res) => {
 //     res.json(state.users);
